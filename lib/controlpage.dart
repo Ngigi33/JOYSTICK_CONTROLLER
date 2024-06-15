@@ -72,9 +72,8 @@ class _ControlPageState extends State<ControlPage> {
 
     _mtuSubscription = widget.device.mtu.listen((value) {
       _mtuSize = value;
-      if (mounted) {
-        setState(() {});
-      }
+
+      setState(() {});
     });
 
     _isConnectingSubscription = widget.device.isConnecting.listen((value) {
@@ -225,14 +224,14 @@ class _ControlPageState extends State<ControlPage> {
   void updateSpeedometer(int rawValue) {
     //print(rawValue);
     double base = rawValue - 127;
-    double gaugeData=0;
-    int remapData=0;
+    double gaugeData = 0;
+    int remapData = 0;
 
     if (base <= 0) {
-      gaugeData=base.remap(-127, 0, 150, 0);
+      gaugeData = base.remap(-127, 0, 150, 0);
       //_anim = true;
     } else {
-      gaugeData=base.remap(0, 127, 0, 150);
+      gaugeData = base.remap(0, 127, 0, 150);
       //_anim = true;
     }
 
@@ -294,7 +293,7 @@ class _ControlPageState extends State<ControlPage> {
       canPop: false,
       onPopInvoked: (didPop) {},
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 221, 190, 66),
+        backgroundColor: Colors.white,
         body: SafeArea(
             child: Stack(
           children: [
@@ -322,7 +321,8 @@ class _ControlPageState extends State<ControlPage> {
                         speedTextStyle: TextStyle(
                             fontSize: 80,
                             fontWeight: FontWeight.bold,
-                            foreground: Paint()..color = Colors.black87),
+                            foreground: Paint()
+                              ..color = const Color.fromARGB(155, 0, 0, 0)),
                         alertColorArray: const [
                           //Colors.orange,
                           Colors.indigo,
@@ -348,11 +348,11 @@ class _ControlPageState extends State<ControlPage> {
                       mode: JoystickMode.vertical,
                       onStickDragStart: () {
                         _isSendingDC = true;
-                        _anim=true;
+                        _anim = true;
                       },
                       onStickDragEnd: () {
                         _isSendingDC = false;
-                        _anim=false;
+                        _anim = false;
                       },
                       listener: (details) {
                         prepareSendingData(CMD_DC, details.y);
